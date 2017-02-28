@@ -42,7 +42,9 @@ module.exports = function(app){
         firstName: 'adam',
         lastName: 'slate',
         email: 'testing@test.com',
-        userName: 'ASL'
+        userName: 'ASL',
+        password: 'password',
+        date: Date.now()
       }], cb);
     });
   }
@@ -99,8 +101,8 @@ module.exports = function(app){
       let siteAdmin = app.models.siteAdmin;
 
       async.parallel({
-        sysAd: async.apply(sysAdmin.findOne()),
-        siteAd: async.apply(siteAdmin.findOne())
+        sysAd: async.apply(sysAdmin.findOne(findCB)),
+        siteAd: async.apply(siteAdmin.findOne(findCB))
       }, function(err, results){
         if(err) return cb(err);
         this._sa = results.sysAd;
@@ -117,5 +119,13 @@ module.exports = function(app){
         });
       });
     });
+  }
+
+  function findCB(err, result){
+    if(err) {
+      console.error(err);
+      process.exit(1);
+    }
+    result;
   }
 };
