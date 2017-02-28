@@ -1,44 +1,56 @@
 {
-  "name": "editableField",
-  "base": "PersistedModel",
+  "name": "systemAdmin",
+  "base": "User",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
+    "firstName": {
       "type": "string",
       "required": true
     },
-    "mediaType": {
+    "lastName": {
       "type": "string",
       "required": true
     },
-    "localURL": {
+    "userName": {
       "type": "string",
       "required": true
     },
-    "textContents": {
+    "email": {
       "type": "string",
-      "default": "None"
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
   "relations": {
-    "webPage": {
-      "type": "belongsTo",
+    "siteAdmins": {
+      "type": "hasMany",
+      "model": "siteAdmin",
+      "foreignKey": "systemAdmin_id"
+    },
+    "websites": {
+      "type": "hasMany",
+      "model": "website",
+      "foreignKey": "systemAdmin_id",
+      "through": "siteAdmin"
+    },
+    "webPages": {
+      "type": "hasMany",
       "model": "webPage",
-      "foreignKey": "webPage_id"
+      "foreignKey": "systemAdmin_id",
+      "through": "website"
     },
     "editableFields": {
-      "type": "hasAndBelongsToMany",
+      "type": "hasMany",
       "model": "editableField",
-      "foreignKey": "field_id"
-    },
-    "systemAdmin": {
-      "type": "belongsTo",
-      "model": "systemAdmin",
-      "foreignKey": "systemAdmin_id"
+      "foreignKey": "systemAdmin_id",
+      "through": "webPage"
     }
   },
   "acls": [

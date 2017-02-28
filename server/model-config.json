@@ -53,5 +53,9 @@
   "editableField": {
     "dataSource": "sqlLite",
     "public": true
+  },
+  "systemAdmin": {
+    "dataSource": "sqlLite",
+    "public": true
   }
 }

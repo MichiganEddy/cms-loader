@@ -36,8 +36,47 @@
       "type": "hasMany",
       "model": "website",
       "foreignKey": "admin_id"
+    },
+    "systemAdmin": {
+      "type": "belongsTo",
+      "model": "systemAdmin",
+      "foreignKey": "systemAdmin_id"
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "update"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "read"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "write"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "systemAdmin",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }
