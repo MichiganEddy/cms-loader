@@ -40,7 +40,11 @@
       ]
     }
   },
-  "files": {},
+  "files": {
+    "loopback#static": {
+      "params": "$!../client/public/downloads/slate.law"
+    }
+  },
   "final": {
     "loopback#urlNotFound": {}
   },

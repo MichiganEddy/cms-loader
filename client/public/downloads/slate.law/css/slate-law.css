@@ -33,6 +33,21 @@ h3 {
   font-weight: 400;
   text-transform: uppercase;
 }
+.options {
+  padding: 5 5 5 5;
+  margin: 10 10 10 10;
+  background-color: #000035;
+  border-style: solid;
+  border-width: thin;
+  border-color: #FAFAFF;
+  float: right;
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 40px;
+  min-height: 20px;
+  text-align: center;
+
+}
 
 h4 {
   margin-top: 0px;
@@ -57,6 +72,16 @@ h6 {
   line-height: 18px;
   font-weight: 700;
 }
+div {}
+.options{
+  float: right;
+  outline-style: solid;
+  outline-width: thin;
+  outline-color: #FAFAFA;
+  padding: 15 30 30 5;
+  margin: 0 10 20 10;
+}
+
 
 p {
   margin-top: 0px;
@@ -1282,3 +1307,11 @@ p {
   }
 }
 
+
+.item-highlight {
+  background-color: #010101;
+}
+
+.subject-highlight {
+  background-color: #222222;
+}
