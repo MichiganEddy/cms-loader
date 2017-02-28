@@ -1,0 +1,41 @@
+{
+  "name": "editableField",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "mediaType": {
+      "type": "string",
+      "required": true
+    },
+    "localURL": {
+      "type": "string",
+      "default": "None"
+    },
+    "textContents": {
+      "type": "string",
+      "default": "None"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "webPage": {
+      "type": "belongsTo",
+      "model": "webPage",
+      "foreignKey": "webPage_id"
+    },
+    "editableFields": {
+      "type": "hasAndBelongsToMany",
+      "model": "editableField",
+      "foreignKey": "field_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

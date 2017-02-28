@@ -1,0 +1,33 @@
+{
+  "name": "website",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "siteName": {
+      "type": "string",
+      "required": true
+    },
+    "siteURL": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "siteAdmin": {
+      "type": "belongsTo",
+      "model": "siteAdmin",
+      "foreignKey": "admin_id"
+    },
+    "webPages": {
+      "type": "hasMany",
+      "model": "webPage",
+      "foreignKey": "website_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,43 @@
+{
+  "name": "siteAdmin",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "userName": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "websites": {
+      "type": "hasMany",
+      "model": "website",
+      "foreignKey": "admin_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

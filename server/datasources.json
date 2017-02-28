@@ -2,5 +2,11 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "sqlLite": {
+    "name": "sqlLite",
+    "connector": "sqlite3",
+    "file": "sqliteDB.store",
+    "debug": true
   }
 }

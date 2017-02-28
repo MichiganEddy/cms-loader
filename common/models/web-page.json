@@ -1,0 +1,32 @@
+{
+  "name": "webPage",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "pageName": {
+      "type": "string",
+      "required": true
+    },
+    "pageUrl": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "website": {
+      "type": "belongsTo",
+      "model": "website",
+      "foreignKey": "website_id"
+    },
+    "editableFields": {
+      "type": "hasMany",
+      "model": "editableField",
+      "foreignKey": "webPage_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

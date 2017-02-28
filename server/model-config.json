@@ -37,5 +37,21 @@
   },
   "Message": {
     "dataSource": null
+  },
+  "siteAdmin": {
+    "dataSource": "sqlLite",
+    "public": true
+  },
+  "website": {
+    "dataSource": "sqlLite",
+    "public": true
+  },
+  "webPage": {
+    "dataSource": "sqlLite",
+    "public": true
+  },
+  "editableField": {
+    "dataSource": "sqlLite",
+    "public": true
   }
 }
