@@ -14,48 +14,48 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "mysqlD"
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mysqlD",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mysqlD",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mysqlD",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mysqlD",
     "public": false
   },
   "Message": {
     "dataSource": null
   },
   "siteAdmin": {
-    "dataSource": "sqlLite",
+    "dataSource": "mysqlD",
     "public": true
   },
   "website": {
-    "dataSource": "sqlLite",
+    "dataSource": "mysqlD",
     "public": true
   },
   "webPage": {
-    "dataSource": "sqlLite",
+    "dataSource": "mysqlD",
     "public": true
   },
   "editableField": {
-    "dataSource": "sqlLite",
+    "dataSource": "mysqlD",
     "public": true
   },
   "systemAdmin": {
-    "dataSource": "sqlLite",
+    "dataSource": "mysqlD",
     "public": true
   }
 }

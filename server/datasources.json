@@ -8,5 +8,15 @@
     "connector": "sqlite3",
     "file": "sqliteDB.store",
     "debug": true
+  },
+  "mysqlD": {
+    "host": "localhost",
+    "port": 3306,
+    "url": "",
+    "database": "CMS",
+    "password": "password",
+    "name": "mysqlD",
+    "user": "cms_local",
+    "connector": "mysql"
   }
 }
