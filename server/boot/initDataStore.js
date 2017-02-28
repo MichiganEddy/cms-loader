@@ -1,15 +1,23 @@
 'use strict';
 
 const async = require('async');
+let ap;
+let models;
 
 module.exports = function(app){
-  const myslqD = app.dataSources.mysqlD;
+  ap = app.bind(this);
+  models = app.models.bind(this);
+  this.app = ap;
+  this.modles = models;
+  const mysqlD = ap.dataSources.mysqlD;
+  this.mysqlD = mysqlD;
   async.parallel({
-    systemAdmin: async.apply(createSysAdmin),
-    siteAdmin: async.apply(createSiteAdmin)
+    systemAdmin: async.apply(createSysAdmin.bind(this, createCB)),
+    siteAdmin: async.apply(createSiteAdmin.bind(this, createCB))
   },
     function(err, results){
       if(err) throw err;
+      console.log(`Returned from async calls createSysAdmin and createSiteAdmin. They returned with values: SysAdmin = ${results.systemAdmin.toString()}, SiteAdmin = ${results.siteAdmin.toString()}`);
       createWebsite(results.systemAdmin, results.siteAdmin, function(err) {
         if(err) return console.error(err);
         console.log('> models created successfully');
@@ -19,10 +27,11 @@ module.exports = function(app){
 
 
   function createSysAdmin(cb) {
-    const mysqlD=app.dataSources.mysqlD;
-    mysqlD.automigrate('systemAdmin', function(err) {
+    this.mysqlD.automigrate('systemAdmin', function(err) {
       if(err) return cb(err);
+      console.log('Automigration for SysAdmin successful');
       let systemAdmin = app.models.systemAdmin;
+      this.sysAdminFindOne = systemAdmin.findOne.bind(systemAdmin).bind(this);
       systemAdmin.create([{
         firstName: 'chris',
         lastName: 'carlson',
@@ -34,10 +43,11 @@ module.exports = function(app){
   }
 
   function createSiteAdmin(cb) {
-    let mysqlD = app.dataSources.mysqlD;
-    mysqlD.automigrate('siteAdmin', function(err){
-      if(err) return cb(err);
+    this.mysqlD.automigrate('siteAdmin', function(err){
+      if(err) return cb(err, null);
+      console.log('Automigration for SiteAdmin successful');
       let siteAdmin = app.models.siteAdmin;
+      this.siteAdminFindOne = siteAdmin.findOne.bind(siteAdmin).bind(this);
       siteAdmin.create([{
         firstName: 'adam',
         lastName: 'slate',
@@ -50,10 +60,11 @@ module.exports = function(app){
   }
 
   function createWebPage(context, cb) {
-    let mysqlD = app.dataSources.mysqlD;
-    mysqlD.automigrate('webPage', function(err){
+    this.mysqlD.automigrate('webPage', function(err){
       if(err) return cb(err);
+      console.log('Automigration for webPage successful.');
       let webPage = app.models.webPage;
+      this.webPage = webPage.bind(this);
       webPage.create([{
         pageName: 'definitions',
         pageUrl: 'https://slate.law/definnitions',
@@ -69,52 +80,49 @@ module.exports = function(app){
   }
 
   function createEditableField(context, cb) {
-    let mysqlD = app.dataSources.mysqlD;
-    mysqlD.automigrate('editableField', function(err){
+    this.mysqlD.automigrate('editableField', function(err){
       if(err) return cb(err);
+      console.log('Automigration for Editable Field successful.');
       let editable = app.models.editableField;
+      this.editable = editable.bind(this);
       editable.create([{
         name: 'termDefinition',
         mediaType: 'text',
         localUrl: 'definitions',
         textContents: 'some text',
-        webPage_id: context.page.id,
-        systemAdmin_id: context.sa.id
+        webPage_id: this.page.id,
+        systemAdmin_id: this.sysAdmin.id
       },
       {
         name: 'defintionGroup',
         mediaType: 'heading',
         localUrl: 'definitions',
         textContents: 'Related Defs',
-        webPage_id: context.page.id,
-        systeAdmin_id: context.sa.id
+        webPage_id: this.page.id,
+        systeAdmin_id: this.sysAdmin.id
       }], cb);
     });
   }
 
   function createWebsite(sysAdmin, siteAdmin, cb) {
-    let mysqlD = app.dataSources.mysqlD;
-    mysqlD.automigrate('website', function(err){
+    this.mysqlD.automigrate('website', function(err){
       if(err) return cb(err);
-      let website = app.models.website;
-      let sysAdmin = app.models.systemAdmin;
-      let siteAdmin = app.models.siteAdmin;
-
+      console.log('Automigration for website successful');
       async.parallel({
-        sysAd: async.apply(sysAdmin.findOne(findCB)),
-        siteAd: async.apply(siteAdmin.findOne(findCB))
+        sysAd: async.apply(this.sysAdminFindOne(findCB)),
+        siteAd: async.apply(this.siteAdminFindOne(findCB))
       }, function(err, results){
         if(err) return cb(err);
-        this._sa = results.sysAd;
-        this._siteA = results.siteAd;
+        let website = app.models.website;
+        this.website = website.bind(this);
         website.create([{
           siteName: 'Slate Law',
           siteURL: 'https://slate.law',
-          admin_id: this._siteA.id,
-          systemAdmin_id: this._sa.id
+          admin_id: results.sysAd.id,
+          systemAdmin_id: results.siteAd.id
         }], function(err, site){
           if(err) return cb(err);
-          this._site = site;
+          this.site = site;
           createWebPage(this, cb);
         });
       });
@@ -122,10 +130,12 @@ module.exports = function(app){
   }
 
   function findCB(err, result){
-    if(err) {
-      console.error(err);
-      process.exit(1);
-    }
-    result;
+    console.log(`Find Callback handling err: ${err}, result: ${Object.prototype.values(result)}`);
+    return(err, result);
+  }
+
+  function createCB(err, result){
+    console.log(`Create Callback handling err: ${err}, results: ${result.forEach(function(res){console.log(res);})}`);
+    return(err, result);
   }
 };
