@@ -125,12 +125,12 @@ module.exports = function(app){
   }
 
   function createLoopbackBuiltInModels(cb){
-      let lbtables = ['User', 'AccessToken', 'ACL', 'RoleMapping', 'Role'];
-      ctMap['mysqlD'].automigrate(lbtables, function(err, tables){
-        if(err) return cb(err, null);
-        console.log('Automigrate successful for loopback built in  models.');
-        return cb(null, tables);
-      });
+    let lbtables = ['User', 'AccessToken', 'ACL', 'RoleMapping', 'Role'];
+    ctMap['mysqlD'].automigrate(lbtables, function(err, tables){
+      if(err) return cb(err, null);
+      console.log('Automigrate successful for loopback built in  models.');
+      return cb(null, tables);
+    });
   }
 
   // function findCB(err, result){
