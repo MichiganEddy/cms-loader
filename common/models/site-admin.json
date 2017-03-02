@@ -12,18 +12,6 @@
     },
     "lastName": {
       "type": "string"
-    },
-    "email": {
-      "type": "string",
-      "required": true
-    },
-    "password": {
-      "type": "string",
-      "required": true
-    },
-    "date": {
-      "type": "date",
-      "required": true
     }
   },
   "validations": [],

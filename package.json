@@ -5,6 +5,8 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node .",
+    "inspector": "node-inspector --config .node-inspectorrc",
+    "debug": "node --debug-brk .",
     "posttest": "npm run lint && nsp check"
   },
   "dependencies": {

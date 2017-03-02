@@ -10,7 +10,7 @@
       "type": "string",
       "required": true
     },
-    "pageUrl": {
+    "pageURL": {
       "type": "string",
       "required": true
     }

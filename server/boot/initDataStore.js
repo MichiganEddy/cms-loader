@@ -1,24 +1,22 @@
 'use strict';
 
 const async = require('async');
-let ap;
-let models;
-
+const ctMap = new WeakMap();
 module.exports = function(app){
-  ap = app.bind(this);
-  models = app.models.bind(this);
-  this.app = ap;
-  this.modles = models;
-  const mysqlD = ap.dataSources.mysqlD;
-  this.mysqlD = mysqlD;
+  ctMap['app'] = app;
+  ctMap['this'] = this;
+  ctMap['mysqlD'] = app.dataSources.mysqlD;
   async.parallel({
-    systemAdmin: async.apply(createSysAdmin.bind(this, createCB)),
-    siteAdmin: async.apply(createSiteAdmin.bind(this, createCB))
+    systemAdmin: async.apply(createSysAdmin),
+    siteAdmin: async.apply(createSiteAdmin),
+    lbModels: async.apply(createLoopbackBuiltInModels)
   },
     function(err, results){
       if(err) throw err;
-      console.log(`Returned from async calls createSysAdmin and createSiteAdmin. They returned with values: SysAdmin = ${results.systemAdmin.toString()}, SiteAdmin = ${results.siteAdmin.toString()}`);
-      createWebsite(results.systemAdmin, results.siteAdmin, function(err) {
+      ctMap['sysAdmin'] = results.systemAdmin[0];
+      ctMap['siteAdmin'] = results.siteAdmin[0];
+      console.log(`Returned from async calls createSysAdmin and createSiteAdmin. \nSystem Admin {ID: ${ctMap['sysAdmin'].id} UID: ${ctMap['sysAdmin'].userName}},\nSiteAdmin {ID: ${ctMap['siteAdmin'].id} UID: ${ctMap['siteAdmin'].userName}}`);
+      createWebsite(function(err) {
         if(err) return console.error(err);
         console.log('> models created successfully');
       });
@@ -27,115 +25,125 @@ module.exports = function(app){
 
 
   function createSysAdmin(cb) {
-    this.mysqlD.automigrate('systemAdmin', function(err) {
-      if(err) return cb(err);
-      console.log('Automigration for SysAdmin successful');
-      let systemAdmin = app.models.systemAdmin;
-      this.sysAdminFindOne = systemAdmin.findOne.bind(systemAdmin).bind(this);
-      systemAdmin.create([{
-        firstName: 'chris',
-        lastName: 'carlson',
-        userName: 'CS',
-        email: 'chris@cta.cloud',
-        password: 'password'
-      }], cb);
+    ctMap['mysqlD'].automigrate('systemAdmin', function(err) {
+      if(err){
+        console.log('Error automigrating systemAdmin.');
+        return cb(err, null);
+      }else {
+        console.log('Automigration for SysAdmin successful');
+        app.models.systemAdmin.create([{
+          firstName: 'chris',
+          lastName: 'carlson',
+          username: 'CS',
+          email: 'chris@cta.cloud',
+          password: 'password'
+        }], cb);
+      }
     });
   }
 
   function createSiteAdmin(cb) {
-    this.mysqlD.automigrate('siteAdmin', function(err){
-      if(err) return cb(err, null);
-      console.log('Automigration for SiteAdmin successful');
-      let siteAdmin = app.models.siteAdmin;
-      this.siteAdminFindOne = siteAdmin.findOne.bind(siteAdmin).bind(this);
-      siteAdmin.create([{
-        firstName: 'adam',
-        lastName: 'slate',
-        email: 'testing@test.com',
-        userName: 'ASL',
-        password: 'password',
-        date: Date.now()
-      }], cb);
+    ctMap['mysqlD'].automigrate('siteAdmin', function(err){
+      if(err){
+        return cb(err, null);
+      }else{
+        console.log('Automigration for SiteAdmin successful');
+        let siteAdmin = ctMap['app'].models.siteAdmin;
+        siteAdmin.create([{
+          firstName: 'adam',
+          lastName: 'slate',
+          email: 'testing@test.com',
+          username: 'ASL',
+          password: 'password',
+          date: Date.now()
+        }], cb);
+      }
     });
   }
 
-  function createWebPage(context, cb) {
-    this.mysqlD.automigrate('webPage', function(err){
+  function createWebsite(cb) {
+    ctMap['mysqlD'].automigrate('website', function(err){
       if(err) return cb(err);
-      console.log('Automigration for webPage successful.');
-      let webPage = app.models.webPage;
-      this.webPage = webPage.bind(this);
-      webPage.create([{
-        pageName: 'definitions',
-        pageUrl: 'https://slate.law/definnitions',
-        website_id: this._site.id,
-        systemAdmin_id: this._sa.id
-
-      }], function(err, page){
+      console.log('Automigration for website successful');
+      let website = ctMap['app'].models.website;
+      website.create([{
+        siteName: 'Slate Law',
+        siteURL: 'https://slate.law',
+        admin_id: ctMap['siteAdmin'].id,
+        systemAdmin_id: ctMap['sysAdmin'].id
+      }], function(err, site){
         if(err) return cb(err);
-        context._page = page;
-        createEditableField(context, cb);
+        ctMap['site'] = site[0];
+        console.log(`Successfully created website: ${site[0].siteName} for ${site[0].siteURL}.`);
+        createWebPage(cb);
       });
     });
   }
 
-  function createEditableField(context, cb) {
-    this.mysqlD.automigrate('editableField', function(err){
+  function createWebPage(cb) {
+    ctMap['mysqlD'].automigrate('webPage', function(err){
+      if(err) return cb(err);
+      console.log('Automigration for webPage successful.');
+      let webPage = ctMap['app'].models.webPage;
+      webPage.create([{
+        pageName: 'definitions',
+        pageURL: 'https://slate.law/definnitions',
+        website_id: ctMap['site'].id,
+        systemAdmin_id: ctMap['sysAdmin'].id
+
+      }], function(err, page){
+        if(err) return cb(err);
+        console.log(`Success Creating Webpage: ${page[0].pageName}, at ${page[0].pageURL}.`);
+        ctMap['page'] = page[0];
+        createEditableField(cb);
+      });
+    });
+  }
+
+  function createEditableField(cb) {
+    ctMap['mysqlD'].automigrate('editableField', function(err){
       if(err) return cb(err);
       console.log('Automigration for Editable Field successful.');
-      let editable = app.models.editableField;
-      this.editable = editable.bind(this);
+      let editable = ctMap['app'].models.editableField;
       editable.create([{
         name: 'termDefinition',
         mediaType: 'text',
-        localUrl: 'definitions',
+        localURL: 'definitions',
         textContents: 'some text',
-        webPage_id: this.page.id,
-        systemAdmin_id: this.sysAdmin.id
+        webPage_id: ctMap['page'].id,
+        systemAdmin_id: ctMap['sysAdmin'].id
       },
       {
         name: 'defintionGroup',
         mediaType: 'heading',
-        localUrl: 'definitions',
+        localURL: 'definitions',
         textContents: 'Related Defs',
-        webPage_id: this.page.id,
-        systeAdmin_id: this.sysAdmin.id
+        webPage_id: ctMap['page'].id,
+        systemAdmin_id: ctMap['sysAdmin'].id
       }], cb);
     });
   }
 
-  function createWebsite(sysAdmin, siteAdmin, cb) {
-    this.mysqlD.automigrate('website', function(err){
-      if(err) return cb(err);
-      console.log('Automigration for website successful');
-      async.parallel({
-        sysAd: async.apply(this.sysAdminFindOne(findCB)),
-        siteAd: async.apply(this.siteAdminFindOne(findCB))
-      }, function(err, results){
-        if(err) return cb(err);
-        let website = app.models.website;
-        this.website = website.bind(this);
-        website.create([{
-          siteName: 'Slate Law',
-          siteURL: 'https://slate.law',
-          admin_id: results.sysAd.id,
-          systemAdmin_id: results.siteAd.id
-        }], function(err, site){
-          if(err) return cb(err);
-          this.site = site;
-          createWebPage(this, cb);
-        });
+  function createLoopbackBuiltInModels(cb){
+      let lbtables = ['User', 'AccessToken', 'ACL', 'RoleMapping', 'Role'];
+      ctMap['mysqlD'].automigrate(lbtables, function(err, tables){
+        if(err) return cb(err, null);
+        console.log('Automigrate successful for loopback built in  models.');
+        return cb(null, tables);
       });
-    });
   }
 
-  function findCB(err, result){
-    console.log(`Find Callback handling err: ${err}, result: ${Object.prototype.values(result)}`);
-    return(err, result);
-  }
-
-  function createCB(err, result){
-    console.log(`Create Callback handling err: ${err}, results: ${result.forEach(function(res){console.log(res);})}`);
-    return(err, result);
-  }
+  // function findCB(err, result){
+  //   console.log(`Find Callback handling err: ${err}, result: ${Object.prototype.values(result)}`);
+  //   return(err, result);
+  // }
+  //
+  // function createCB(err, result, cb){
+  //   if(err) return cb(err, null);
+  //   console.log('CreateCB. Results:\n');
+  //   for (let k in result){
+  //     console.log(k, result[k]);
+  //   }
+  //   return cb(null, result);
+  // }
 };
