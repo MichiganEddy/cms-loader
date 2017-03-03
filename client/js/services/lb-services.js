@@ -1,4 +1,4 @@
-\// CommonJS package manager support
+// CommonJS package manager support
 if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.exports === exports) {
   // Export the *name* of this Angular module
@@ -1267,7 +1267,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.User#patchAttributes
+             * @name lbServices.User#prototype$patchAttributes
              * @methodOf lbServices.User
              *
              * @description
@@ -1297,7 +1297,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `User` object.)
              * </em>
              */
-        R["patchAttributes"] = R["prototype$updateAttributes"];
+        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
 
         /**
          * @ngdoc method
@@ -2792,7 +2792,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.SiteAdmin#patchAttributes
+             * @name lbServices.SiteAdmin#prototype$patchAttributes
              * @methodOf lbServices.SiteAdmin
              *
              * @description
@@ -2822,7 +2822,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `SiteAdmin` object.)
              * </em>
              */
-        R["patchAttributes"] = R["prototype$updateAttributes"];
+        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
 
         /**
          * @ngdoc method
@@ -4197,7 +4197,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.Website#patchAttributes
+             * @name lbServices.Website#prototype$patchAttributes
              * @methodOf lbServices.Website
              *
              * @description
@@ -4227,7 +4227,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `Website` object.)
              * </em>
              */
-        R["patchAttributes"] = R["prototype$updateAttributes"];
+        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
 
 
         /**
@@ -5597,7 +5597,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.WebPage#patchAttributes
+             * @name lbServices.WebPage#prototype$patchAttributes
              * @methodOf lbServices.WebPage
              *
              * @description
@@ -5627,7 +5627,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `WebPage` object.)
              * </em>
              */
-        R["patchAttributes"] = R["prototype$updateAttributes"];
+        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
 
 
         /**
@@ -7104,7 +7104,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.EditableField#patchAttributes
+             * @name lbServices.EditableField#prototype$patchAttributes
              * @methodOf lbServices.EditableField
              *
              * @description
@@ -7134,7 +7134,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `EditableField` object.)
              * </em>
              */
-        R["patchAttributes"] = R["prototype$updateAttributes"];
+        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
 
 
         /**
@@ -9181,7 +9181,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.SystemAdmin#patchAttributes
+             * @name lbServices.SystemAdmin#prototype$patchAttributes
              * @methodOf lbServices.SystemAdmin
              *
              * @description
@@ -9211,7 +9211,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `SystemAdmin` object.)
              * </em>
              */
-        R["patchAttributes"] = R["prototype$updateAttributes"];
+        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
 
         /**
          * @ngdoc method

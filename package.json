@@ -4,6 +4,8 @@
   "main": "server/server.js",
   "scripts": {
     "lint": "eslint .",
+    "client_deps_build": "npm --prefix ./client install ./client",
+    "buildNg": "lb-ng server/server.js client/js/services/lb-services.js",
     "start": "node .",
     "inspector": "node-inspector --config .node-inspectorrc",
     "debug": "node --debug-brk .",
@@ -20,16 +22,19 @@
     "loopback-connector-sqlite3": "^1.2.0",
     "loopback-datasource-juggler": "^2.39.0",
     "serve-favicon": "^2.0.1",
-    "sqlite3": "^3.1.8",
     "strong-error-handler": "^1.0.1"
   },
   "devDependencies": {
+    "dgeni": "^0.4.7",
+    "dgeni-packages": "^0.16.8",
     "eslint": "^2.13.1",
     "eslint-config-loopback": "^4.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "nsp": "^2.1.0",
-    "sinon": "^1.17.7"
+    "rxjs": "^5.2.0",
+    "sinon": "^1.17.7",
+    "zone.js": "^0.7.7"
   },
   "repository": {
     "type": "",
