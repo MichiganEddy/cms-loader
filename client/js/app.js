@@ -7,6 +7,18 @@ angular
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
       $urlRouterProvider) {
     $stateProvider
+      .state('sign-up', {
+        url: '/sign-up',
+        component: 'sign-up'
+      })
+      .state('siteAdmin', {
+        url: '/users/:username',
+        component: 'siteAdmin'
+      })
+      .state('siteAdmin.websites', {
+        url: '/administrators/:username/websites',
+        component: 'adminSites'
+      })
       .state('todo', {
         url: '',
         templateUrl: 'views/todo.html',

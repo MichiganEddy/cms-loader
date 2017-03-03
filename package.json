@@ -4,7 +4,7 @@
   "main": "server/server.js",
   "scripts": {
     "lint": "eslint .",
-    "client_deps_build": "npm --prefix ./client install ./client",
+    "client_deps_build": "npm --prefix ./client install -s angular -s angular-resource -s angular-ui-router",
     "buildNg": "lb-ng server/server.js client/js/services/lb-services.js",
     "start": "node .",
     "inspector": "node-inspector --config .node-inspectorrc",
