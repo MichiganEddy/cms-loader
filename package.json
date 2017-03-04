@@ -25,6 +25,7 @@
     "strong-error-handler": "^1.0.1"
   },
   "devDependencies": {
+    "@types/node": "^7.0.5",
     "dgeni": "^0.4.7",
     "dgeni-packages": "^0.16.8",
     "eslint": "^2.13.1",

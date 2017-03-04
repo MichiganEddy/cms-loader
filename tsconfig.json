@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "baseUrl": "/home/christopher/Source/cms-loader/",
+    "target": "es5",
+    "module": "commonjs",
+    "importHelpers": true,
+    "mapRoot": "./typescripts/debug",
+    "rootDir": "./typescripts",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [ "es2015", "dom", "es2015.Proxy", "es2015.Reflect", "es2015.Iterable", "es2015.Symbol", "es2015.Promise", "es2015.Symbol" ],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "typeRoots": ["./typescripts/.typings"],
+    "pretty": true,
+    "outDir": "./client/js"
+    },
+  "files": [
+    "core.ts",
+    "sys.ts",
+    "types.ts",
+    "scanner.ts",
+    "parser.ts",
+    "utilities.ts",
+    "binder.ts",
+    "checker.ts",
+    "emitter.ts",
+    "program.ts",
+    "commandLineParser.ts",
+    "tsc.ts",
+    "diagnosticInformationMap.generated.ts"
+]
+}
