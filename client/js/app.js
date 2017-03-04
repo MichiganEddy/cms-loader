@@ -9,7 +9,7 @@ angular
     $stateProvider
       .state('sign-up', {
         url: '/sign-up',
-        component: 'sign-up'
+        component: 'signUp'
       })
       .state('siteAdmin', {
         url: '/users/:username',

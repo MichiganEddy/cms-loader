@@ -1267,7 +1267,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.User#prototype$patchAttributes
+             * @name lbServices.User#patchAttributes
              * @methodOf lbServices.User
              *
              * @description
@@ -1297,7 +1297,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `User` object.)
              * </em>
              */
-        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
+        R["patchAttributes"] = R["prototype$updateAttributes"];
 
         /**
          * @ngdoc method
@@ -1352,7 +1352,60 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.modelName = "User";
 
 
-
+        /**
+         * @ngdoc object
+         * @name lbServices.User#schema
+         * @propertyOf lbServices.User
+         * @description
+         * The schema of the model represented by this $resource
+         */
+        R.schema = {
+  "name": "User",
+  "properties": {
+    "realm": {
+      "type": "String"
+    },
+    "username": {
+      "type": "String"
+    },
+    "password": {
+      "required": true,
+      "type": "String"
+    },
+    "credentials": {
+      "deprecated": true,
+      "type": "Object"
+    },
+    "challenges": {
+      "deprecated": true,
+      "type": "Object"
+    },
+    "email": {
+      "required": true,
+      "type": "String"
+    },
+    "emailVerified": {
+      "type": "Boolean"
+    },
+    "verificationToken": {
+      "type": "String"
+    },
+    "status": {
+      "type": "String"
+    },
+    "created": {
+      "type": "Date"
+    },
+    "lastUpdated": {
+      "type": "Date"
+    },
+    "id": {
+      "generated": true,
+      "id": 1,
+      "type": "Number"
+    }
+  }
+};
         return R;
       }]);
 
@@ -1433,7 +1486,23 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.modelName = "Message";
 
 
-
+        /**
+         * @ngdoc object
+         * @name lbServices.Message#schema
+         * @propertyOf lbServices.Message
+         * @description
+         * The schema of the model represented by this $resource
+         */
+        R.schema = {
+  "name": "Message",
+  "properties": {
+    "id": {
+      "generated": true,
+      "id": 1,
+      "type": "Number"
+    }
+  }
+};
         return R;
       }]);
 
@@ -2792,7 +2861,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.SiteAdmin#prototype$patchAttributes
+             * @name lbServices.SiteAdmin#patchAttributes
              * @methodOf lbServices.SiteAdmin
              *
              * @description
@@ -2822,7 +2891,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `SiteAdmin` object.)
              * </em>
              */
-        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
+        R["patchAttributes"] = R["prototype$updateAttributes"];
 
         /**
          * @ngdoc method
@@ -3216,7 +3285,73 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           return action.apply(R, arguments);
         };
 
-
+        /**
+         * @ngdoc object
+         * @name lbServices.SiteAdmin#schema
+         * @propertyOf lbServices.SiteAdmin
+         * @description
+         * The schema of the model represented by this $resource
+         */
+        R.schema = {
+  "name": "SiteAdmin",
+  "properties": {
+    "firstName": {
+      "required": true,
+      "type": "String"
+    },
+    "lastName": {
+      "type": "String"
+    },
+    "realm": {
+      "type": "String"
+    },
+    "username": {
+      "type": "String"
+    },
+    "password": {
+      "required": true,
+      "type": "String"
+    },
+    "credentials": {
+      "deprecated": true,
+      "type": "Object"
+    },
+    "challenges": {
+      "deprecated": true,
+      "type": "Object"
+    },
+    "email": {
+      "required": true,
+      "type": "String"
+    },
+    "emailVerified": {
+      "type": "Boolean"
+    },
+    "verificationToken": {
+      "type": "String"
+    },
+    "status": {
+      "type": "String"
+    },
+    "created": {
+      "type": "Date"
+    },
+    "lastUpdated": {
+      "type": "Date"
+    },
+    "id": {
+      "generated": true,
+      "id": 1,
+      "type": "Number"
+    },
+    "siteAdmin_id": {
+      "type": "Number"
+    },
+    "systemAdmin_id": {
+      "type": "Number"
+    }
+  }
+};
         return R;
       }]);
 
@@ -4197,7 +4332,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.Website#prototype$patchAttributes
+             * @name lbServices.Website#patchAttributes
              * @methodOf lbServices.Website
              *
              * @description
@@ -4227,7 +4362,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `Website` object.)
              * </em>
              */
-        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
+        R["patchAttributes"] = R["prototype$updateAttributes"];
 
 
         /**
@@ -4616,7 +4751,37 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           return action.apply(R, arguments);
         };
 
-
+        /**
+         * @ngdoc object
+         * @name lbServices.Website#schema
+         * @propertyOf lbServices.Website
+         * @description
+         * The schema of the model represented by this $resource
+         */
+        R.schema = {
+  "name": "Website",
+  "properties": {
+    "siteName": {
+      "required": true,
+      "type": "String"
+    },
+    "siteURL": {
+      "required": true,
+      "type": "String"
+    },
+    "id": {
+      "generated": true,
+      "id": 1,
+      "type": "Number"
+    },
+    "admin_id": {
+      "type": "Number"
+    },
+    "systemAdmin_id": {
+      "type": "Number"
+    }
+  }
+};
         return R;
       }]);
 
@@ -5597,7 +5762,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.WebPage#prototype$patchAttributes
+             * @name lbServices.WebPage#patchAttributes
              * @methodOf lbServices.WebPage
              *
              * @description
@@ -5627,7 +5792,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `WebPage` object.)
              * </em>
              */
-        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
+        R["patchAttributes"] = R["prototype$updateAttributes"];
 
 
         /**
@@ -6016,7 +6181,37 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           return action.apply(R, arguments);
         };
 
-
+        /**
+         * @ngdoc object
+         * @name lbServices.WebPage#schema
+         * @propertyOf lbServices.WebPage
+         * @description
+         * The schema of the model represented by this $resource
+         */
+        R.schema = {
+  "name": "WebPage",
+  "properties": {
+    "pageName": {
+      "required": true,
+      "type": "String"
+    },
+    "pageURL": {
+      "required": true,
+      "type": "String"
+    },
+    "id": {
+      "generated": true,
+      "id": 1,
+      "type": "Number"
+    },
+    "website_id": {
+      "type": "Number"
+    },
+    "systemAdmin_id": {
+      "type": "Number"
+    }
+  }
+};
         return R;
       }]);
 
@@ -7104,7 +7299,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.EditableField#prototype$patchAttributes
+             * @name lbServices.EditableField#patchAttributes
              * @methodOf lbServices.EditableField
              *
              * @description
@@ -7134,7 +7329,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `EditableField` object.)
              * </em>
              */
-        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
+        R["patchAttributes"] = R["prototype$updateAttributes"];
 
 
         /**
@@ -7632,7 +7827,45 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           return action.apply(R, arguments);
         };
 
-
+        /**
+         * @ngdoc object
+         * @name lbServices.EditableField#schema
+         * @propertyOf lbServices.EditableField
+         * @description
+         * The schema of the model represented by this $resource
+         */
+        R.schema = {
+  "name": "EditableField",
+  "properties": {
+    "name": {
+      "required": true,
+      "type": "String"
+    },
+    "mediaType": {
+      "required": true,
+      "type": "String"
+    },
+    "localURL": {
+      "required": true,
+      "type": "String"
+    },
+    "textContents": {
+      "default": "None",
+      "type": "String"
+    },
+    "id": {
+      "generated": true,
+      "id": 1,
+      "type": "Number"
+    },
+    "webPage_id": {
+      "type": "Number"
+    },
+    "systemAdmin_id": {
+      "type": "Number"
+    }
+  }
+};
         return R;
       }]);
 
@@ -9181,7 +9414,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.SystemAdmin#prototype$patchAttributes
+             * @name lbServices.SystemAdmin#patchAttributes
              * @methodOf lbServices.SystemAdmin
              *
              * @description
@@ -9211,7 +9444,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              * This usually means the response is a `SystemAdmin` object.)
              * </em>
              */
-        R["prototype$patchAttributes"] = R["prototype$updateAttributes"];
+        R["patchAttributes"] = R["prototype$updateAttributes"];
 
         /**
          * @ngdoc method
@@ -10805,7 +11038,74 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           return action.apply(R, arguments);
         };
 
-
+        /**
+         * @ngdoc object
+         * @name lbServices.SystemAdmin#schema
+         * @propertyOf lbServices.SystemAdmin
+         * @description
+         * The schema of the model represented by this $resource
+         */
+        R.schema = {
+  "name": "SystemAdmin",
+  "properties": {
+    "firstName": {
+      "required": "true",
+      "type": "String"
+    },
+    "lastName": {
+      "required": "true",
+      "type": "String"
+    },
+    "realms": {
+      "0": "string",
+      "type": [
+        null
+      ]
+    },
+    "realm": {
+      "type": "String"
+    },
+    "username": {
+      "type": "String"
+    },
+    "password": {
+      "required": true,
+      "type": "String"
+    },
+    "credentials": {
+      "deprecated": true,
+      "type": "Object"
+    },
+    "challenges": {
+      "deprecated": true,
+      "type": "Object"
+    },
+    "email": {
+      "required": true,
+      "type": "String"
+    },
+    "emailVerified": {
+      "type": "Boolean"
+    },
+    "verificationToken": {
+      "type": "String"
+    },
+    "status": {
+      "type": "String"
+    },
+    "created": {
+      "type": "Date"
+    },
+    "lastUpdated": {
+      "type": "Date"
+    },
+    "id": {
+      "generated": true,
+      "id": 1,
+      "type": "Number"
+    }
+  }
+};
         return R;
       }]);
 
