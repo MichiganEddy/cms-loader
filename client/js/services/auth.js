@@ -5,7 +5,7 @@
 
 angular
   .module('app')
-  .factory('AuthService', ['siteAdmin', '$q', '$rootScope', '$state', function(
+  .factory('AuthService', ['SiteAdmin', '$q', '$rootScope', '$state', function(
       User, $q, $rootScope, $state) {
     function login(email, username, password) {
       if(email || username){
