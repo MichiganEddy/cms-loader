@@ -58,21 +58,8 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "systemAdmin",
+      "principalId": "$owner",
       "permission": "ALLOW"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "systemAdmin",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW",
-      "property": "profile"
     }
   ],
   "methods": {}
