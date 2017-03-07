@@ -15,10 +15,8 @@
       "required": "true"
     },
     "realms": {
-      "type": [
-        "string"
-      ]
-    }
+      "type": "string[]"
+    }    
   },
   "validations": [],
   "relations": {
