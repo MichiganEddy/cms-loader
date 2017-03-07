@@ -16,10 +16,6 @@
   "User": {
     "dataSource": "mysqlD"
   },
-  "AccessToken": {
-    "dataSource": "null",
-    "public": false
-  },
   "ACL": {
     "dataSource": "mysqlD",
     "public": false

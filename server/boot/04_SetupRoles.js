@@ -3,8 +3,10 @@
 module.exports = function(app) {
   let Role = app.models.Role;
 
-  Role.registerREsolver('systemAdmin', function(role, context, cb){
-    let userId = context.systemAccessToken.userId;
+  Role.registerResolver('systemAdmin', function(role, context, cb){
+    // Object.keys(context).forEach(function(key){console.log(`Key ${key} = ${context[key]}`);});
+    console.log(`Access Token: ${context.accessToken}`);
+    let userId = context.accessToken.userId || null;
     if(!userId){
       return process.nextTick(() => cb(null, false));
     }
