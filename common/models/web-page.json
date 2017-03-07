@@ -25,7 +25,7 @@
     "editableFields": {
       "type": "hasMany",
       "model": "editableField",
-      "foreignKey": "webPage_id"
+      "foreignKey": "editableField_id"
     },
     "systemAdmin": {
       "type": "belongsTo",

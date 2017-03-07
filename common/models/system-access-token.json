@@ -11,7 +11,7 @@
     "user": {
       "type": "belongsTo",
       "idName": "id",
-      "plymorphic": {
+      "polymorphic": {
         "idType": "string",
         "foreignKey": "userId",
         "discriminator": "principalType"

@@ -15,7 +15,7 @@ module.exports = function(app){
       if(err) throw err;
       ctMap['sysAdmin'] = results.systemAdmin[0];
       ctMap['siteAdmin'] = results.siteAdmin[0];
-      console.log(`Returned from async calls createSysAdmin and createSiteAdmin. \nSystem Admin {ID: ${ctMap['sysAdmin'].id} UID: ${ctMap['sysAdmin'].userName}},\nSiteAdmin {ID: ${ctMap['siteAdmin'].id} UID: ${ctMap['siteAdmin'].userName}}`);
+      console.log(`Returned from async calls createSysAdmin and createSiteAdmin. \nSystem Admin {ID: ${ctMap['sysAdmin'].id} UID: ${ctMap['sysAdmin'].username}},\nSiteAdmin {ID: ${ctMap['siteAdmin'].id} UID: ${ctMap['siteAdmin'].username}}`);
       createWebsite(function(err) {
         if(err) return console.error(err);
         console.log('> models created successfully');
@@ -36,7 +36,8 @@ module.exports = function(app){
           lastName: 'carlson',
           username: 'CS',
           email: 'chris@cta.cloud',
-          password: 'password'
+          password: 'password',
+          created: Date.now()
         }], cb);
       }
     });
@@ -55,7 +56,7 @@ module.exports = function(app){
           email: 'testing@test.com',
           username: 'ASL',
           password: 'password',
-          date: Date.now()
+          created: Date.now()
         }], cb);
       }
     });
@@ -69,8 +70,8 @@ module.exports = function(app){
       website.create([{
         siteName: 'Slate Law',
         siteURL: 'https://slate.law',
-        admin_id: ctMap['siteAdmin'].id,
-        systemAdmin_id: ctMap['sysAdmin'].id
+        admin_id: 1,
+        systemAdmin_id: 1
       }], function(err, site){
         if(err) return cb(err);
         ctMap['site'] = site[0];
@@ -88,8 +89,8 @@ module.exports = function(app){
       webPage.create([{
         pageName: 'definitions',
         pageURL: 'https://slate.law/definnitions',
-        website_id: ctMap['site'].id,
-        systemAdmin_id: ctMap['sysAdmin'].id
+        website_id: 1,
+        systemAdmin_id: 1
 
       }], function(err, page){
         if(err) return cb(err);
@@ -110,22 +111,22 @@ module.exports = function(app){
         mediaType: 'text',
         localURL: 'definitions',
         textContents: 'some text',
-        webPage_id: ctMap['page'].id,
-        systemAdmin_id: ctMap['sysAdmin'].id
+        webPage_id: 1,
+        systemAdmin_id: 1
       },
       {
         name: 'defintionGroup',
         mediaType: 'heading',
         localURL: 'definitions',
         textContents: 'Related Defs',
-        webPage_id: ctMap['page'].id,
-        systemAdmin_id: ctMap['sysAdmin'].id
+        webPage_id: 1,
+        systemAdmin_id: 1
       }], cb);
     });
   }
 
   function createLoopbackBuiltInModels(cb){
-    let lbtables = ['User', 'AccessToken', 'ACL', 'RoleMapping', 'Role'];
+    let lbtables = ['User', 'SystemAccessToken', 'ACL', 'RoleMapping', 'Role'];
     ctMap['mysqlD'].automigrate(lbtables, function(err, tables){
       if(err) return cb(err, null);
       console.log('Automigrate successful for loopback built in  models.');

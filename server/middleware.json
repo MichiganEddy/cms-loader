@@ -31,13 +31,7 @@
     }
   },
   "session": {},
-  "auth": {
-    "loopback#token": {
-      "params": {
-        "model": "SystemAccessToken"
-      }
-    }
-  },
+  "auth": { },
   "parse": {},
   "routes": {
     "loopback#rest": {

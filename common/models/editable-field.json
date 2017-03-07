@@ -33,7 +33,7 @@
     "editableFields": {
       "type": "hasAndBelongsToMany",
       "model": "editableField",
-      "foreignKey": "field_id"
+      "foreignKey": "editableField_id"
     },
     "systemAdmin": {
       "type": "belongsTo",
