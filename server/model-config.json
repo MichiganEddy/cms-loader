@@ -57,5 +57,9 @@
   "systemAdmin": {
     "dataSource": "mysqlD",
     "public": true
+  },
+  "SystemAccessToken": {
+    "dataSource": "mysqlD",
+    "public": false
   }
 }
