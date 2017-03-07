@@ -22,7 +22,10 @@
     "loopback-connector-sqlite3": "^1.2.0",
     "loopback-datasource-juggler": "^2.39.0",
     "serve-favicon": "^2.0.1",
-    "strong-error-handler": "^1.0.1"
+    "strong-error-handler": "^1.0.1",
+    "zone.js": "^0.7.7",
+    "rxjs": "^5.2.0",
+    "core-js": "^2.4.0"
   },
   "devDependencies": {
     "@types/angular": "^1.6.7",
@@ -41,10 +44,8 @@
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "nsp": "^2.1.0",
-    "rxjs": "^5.2.0",
     "sinon": "^1.17.7",
-    "typescript": "^2.2.1",
-    "zone.js": "^0.7.7"
+    "typescript": "^2.2.1"
   },
   "repository": {
     "type": "",
