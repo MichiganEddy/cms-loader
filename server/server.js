@@ -1,9 +1,14 @@
 'use strict';
 
-var loopback = require('loopback');
-var boot = require('loopback-boot');
-
+const loopback = require('loopback');
+const boot = require('loopback-boot');
+const path = require('path');
+const bodyParser = require('body-parser');
 var app = module.exports = loopback();
+
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'templates'));
 
 app.start = function() {
   // start the web server
