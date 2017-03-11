@@ -133,18 +133,4 @@ module.exports = function(app){
       return cb(null, tables);
     });
   }
-
-  // function findCB(err, result){
-  //   console.log(`Find Callback handling err: ${err}, result: ${Object.prototype.values(result)}`);
-  //   return(err, result);
-  // }
-  //
-  // function createCB(err, result, cb){
-  //   if(err) return cb(err, null);
-  //   console.log('CreateCB. Results:\n');
-  //   for (let k in result){
-  //     console.log(k, result[k]);
-  //   }
-  //   return cb(null, result);
-  // }
 };

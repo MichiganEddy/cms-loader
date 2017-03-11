@@ -10,15 +10,15 @@ module.exports = function(app){
     res.sendFile('../client/views/home.html', { root: __dirname });
   });
 
-  router.get('/admin/login', function(req, res){
+  router.get('/siteAdmins/login', function(req, res){
     res.sendFile('../client/views/login.html', { root: __dirname });
   });
 
-  router.get('/sys/login', function(req, res){
+  router.get('/systemAdmins/login', function(req, res){
     res.sendFile('../client/views/login.html', { root: __dirname });
   });
 
-  router.post('/admin/login', function(req, res){
+  router.post('/siteAdmins/login', function(req, res){
     siteAdmin.login({
       username: req.body.username,
       password: req.body.password
@@ -32,7 +32,7 @@ module.exports = function(app){
         });
         return;
       }
-      res.render('/admin/', {
+      res.render('', {
         userName: token.user.username,
         firstName: token.user.firstName,
         lastName: token.user.lastName,
@@ -42,7 +42,7 @@ module.exports = function(app){
     });
   });
 
-  router.post('/sys/login', function(req, res){
+  router.post('/systemAdmins/login', function(req, res){
     sysAdmin.login({
       username: req.body.username,
       password: req.body.password
@@ -61,20 +61,21 @@ module.exports = function(app){
         firstName: token.user.firstName,
         lastName: token.user.lastName,
         email: token.user.email,
-        accessToken: token.id
+        accessToken: token.id,
+        redirectTo: `/systemAdmins/${token.user.id}`
       });
     });
   });
 
-  router.get('*', function (req, res){
-    res.render('home', {
-      userName: 'No User Retrieved',
-      firstName: 'App Uninitialized.',
-      lastName: 'Error State..',
-      email: 'it always takes longer than expected.',
-      accessToken: ''
-    });
-  });
+  // router.get('*', function (req, res){
+  //   res.render('home', {
+  //     userName: 'No User Retrieved',
+  //     firstName: 'App Uninitialized.',
+  //     lastName: 'Error State..',
+  //     email: 'it always takes longer than expected.',
+  //     accessToken: ''
+  //   });
+  // });
 
   app.use(loopback.static(path.resolve(__dirname, '../client')));
   app.use(loopback.static(path.resolve(__dirname, '../client/views')));
